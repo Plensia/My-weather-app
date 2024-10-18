@@ -12,11 +12,16 @@ body{
     padding: 30px;
 }
 
+header{
+    border-bottom: 1px solid antiquewhite;
+    padding: 0 0 30px 0;
+}
+
 .search-form-input{
     background-color: antiquewhite;
     border: none;
-    border-radius: 5px;
-    width: 74%;
+    border-radius: 6px;
+    width: 80%;
     font-size: 16px;
     padding: 15px 20px;
 }
@@ -26,7 +31,7 @@ body{
     padding: 15px 30px;
     border: none;
     font-size: 16px;
-    margin-left: 6px;
+    margin-left: 5px;
     border-radius: 6px;
     color: black;
 }
