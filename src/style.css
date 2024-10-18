@@ -1,0 +1,14 @@
+body{
+    background-color:antiquewhite;
+    font-family: "Lato", sans-serif;
+}
+
+.my-weather-app{
+    background-color: aliceblue;
+    max-width: 600px;
+    margin: 40px auto;
+    box-shadow: 0 30px 50px rgba(65, 50, 100, 0.08);
+    border-radius: 16px;
+    padding: 30px;
+
+}
