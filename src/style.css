@@ -64,9 +64,8 @@ main{
     display: flex;
 }
 .temperature-icon{
-    font-size: 44px;
-    margin-top: 18px;
-
+    width: 88px;
+    height: 88px;
 }
 .temperature-value{
     font-size: 88px;
