@@ -37,6 +37,13 @@ header{
     border-radius: 6px;
     color: black;
 }
+main{
+    padding: 30px 0;
+}
+.main-section{
+    display:flex;
+    justify-content: space-between;
+}
 
 footer{
     border-top: 1px solid antiquewhite;
