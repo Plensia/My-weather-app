@@ -2,8 +2,20 @@ function updateweather(response) {
     let temperatureElement = document.querySelector("#temp-value");
     let temperature = response.data.temperature.current
     temperatureElement.innerHTML = Math.round(temperature) ;
+    
+    let descriptionElement = document.querySelector("#description");
+    let humidityElement = document.querySelector("#humidity");
+    let windspeedElement = document.querySelector("#wind-speed");
+    let timeElement = document.querySelector("#time");
+
+    //date
+    let date = new Date(response.data.time * 1000);
 
     let cityElement = document.querySelector("#weather-app-city");
+    timeElement.innerHTML = formatDate(date);
+    descriptionElement.innerHTML = response.data.condition.description;
+    humidityElement.innerHTML = `${response.data.temperature.humidity}%`;
+    windspeedElement.innerHTML = `${response.data.wind.speed}km/h`;
     cityElement.innerHTML = response.data.city;
 }
 
@@ -14,7 +26,19 @@ function searchCity(city){
     axios.get(apiUrl).then(updateweather);
 }
 
+function formatDate(date){
+    
+    let minutes= date.getMinutes();
+    let hours = date.getHours();
+    let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
 
+    let day = days[date.getDay()];
+
+    if(minutes<10){
+        minutes = `0${minutes}`;
+    }
+    return `${day} ${hours} ${minutes}`;
+}
 function handleSearchSubmit(event) {
     event.preventDefault();
     let searchInput = document.querySelector("#search-form-input");
