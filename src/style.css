@@ -51,6 +51,32 @@ main{
     justify-content: space-between;
 }
 
+.weather-app-details{
+    font-size: 16px;
+    color: rgba(39, 33, 66, 0.4);
+    line-height: 24px;
+    font-weight: 500;
+}
+.weather-app-details strong{
+    color:burlywood;
+}
+.weather-app-temperature{
+    display: flex;
+}
+.temperature-icon{
+    font-size: 88px;
+    margin-top: 18px;
+
+}
+.temperature-value{
+    font-size: 88px;
+    line-height: 88px;
+    font-weight: bold;
+}
+.temperature-unit{
+    margin-top: 16px;
+    font-size: 28px;
+}
 footer{
     border-top: 1px solid antiquewhite;
     padding: 30px 0 0 0;
