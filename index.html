@@ -1,47 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="src/style.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="shortcut icon" href="assets/cloud_icon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <title>My Weather App</title>
-</head>
-<body>
+  </head>
+  <body>
+    <!-- Loading overlay -->
+    <div id="loading-overlay">
+      <div class="loader"></div>
+    </div>
     <div class="my-weather-app">
-    <header>
+      <header>
         <form class="search-form" id="search-form">
-            <input type="search" placeholder="Enter a city.." required class="search-form-input" id="search-form-input"/>
-            <input type="submit" value="Search" class="search-form-button" />
+          <div class="input_suggest_container">
+            <input
+              type="search"
+              class="search-form-input"
+              id="search-form-input"
+              placeholder="Enter a city..."
+              autocomplete="off"
+              spellcheck="false"
+              required
+            />
+          </div>
+          <div class="search_button">
+            <button type="submit" class="search-form-button">🔍 Search</button>
+          </div>
         </form>
-    </header>
-    <main>
+      </header>
+      <main>
         <div class="main-section">
-            <div>
-     <h1 id="weather-app-city">Dodoma</h1>
-     <p class="weather-app-details">
-        <span id="time"></span> ,<span id="description">Intermittent clouds</span> 
-        <br />
-        Humidity: <strong id="humidity"></strong>, Wind: <strong id="wind-speed"></strong>
-     </p>
-    </div>
-    <div class="weather-app-temperature">
-        <div id="weather-icon"></div>
-        <div class="temperature-value" id="temp-value">29</div>
-        <div class="temperature-unit">°C</div>             
-    </div>
-   </div>
-</main>
-    <footer>
-        This project is coded by 
+          <div>
+            <h1 id="weather-app-city">City</h1>
+            <p class="weather-app-details">
+              <span id="time"></span>, <span id="description">Clouds</span>
+              <br />
+              Humidity: <strong id="humidity"></strong>, Wind:
+              <strong id="wind-speed"></strong>
+            </p>
+          </div>
+          <div class="weather-app-temperature">
+            <div id="weather-icon"></div>
+            <div class="temperature-value" id="temp-value">temp</div>
+            <div class="temperature-unit">°C</div>
+          </div>
+        </div>
+      </main>
+      <footer>
+        This project is coded by
         <a href="https://github.com/Plensia" targe="_blank">Plensia Lukosi </a>
-       and is hosted on <a href="https://github.com/Plensia/My-weather-app" target="_blank">Github</a>
-       the website is hosted on <a href="https://project-my-weather-app.netlify.app/" target="_blank"> Netlify</a>
-    </footer>
-</div>
-<script src="src/app.js"></script>
-</body>
+        and is hosted on
+        <a href="https://github.com/Plensia/My-weather-app" target="_blank"
+          >Github</a
+        >
+        the website is hosted on
+        <a href="https://project-my-weather-app.netlify.app/" target="_blank">
+          Netlify</a
+        >
+      </footer>
+    </div>
+    <script src="src/app.js"></script>
+  </body>
 </html>
