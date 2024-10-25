@@ -174,7 +174,7 @@ main {
   display: grid;
   border: 4px solid #0000;
   border-radius: 50%;
-  border-right-color: #25b09b;
+  border-right-color:blanchedalmond;
   -webkit-animation: l15 1s infinite linear;
   animation: l15 1s infinite linear;
 }
@@ -255,6 +255,34 @@ main {
     background-position: 0% 50%, 50% 50%, 100% 100%;
   }
 }
+.weather-forecast {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 30px;
+  }
+  
+  .weather-forecast-day {
+    text-align: center;
+    color: antiquewhite;
+    font-size: 16px;
+    line-height: 20px;
+    margin-bottom: 10px;
+  }
+  .weather-forecast-icon {
+    font-size: 38px;
+    text-align: center;
+  }
+  .weather-forecast-temperatures {
+    text-align: center;
+    color: burlywood;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+  }
+  .weather-forecast-temperature {
+    padding: 0 10px;
+  }
+  
 
 footer {
   border-top: 1px solid antiquewhite;
