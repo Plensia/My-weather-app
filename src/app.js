@@ -334,3 +334,31 @@ searchInput.addEventListener("keydown", (e) => {
     console.log("Geolocation is not supported by this browser.");
   }
 })();
+
+//forecast details
+function displayForecast(){
+
+
+
+let days = ["Tue", "wed", "Thu", "Fri", "Sat"];
+let forecasthtml = "";
+days.forEach(function (day){
+
+forecasthtml +=  
+`
+ <div class="weather-forecast-details">
+            <div class="weather-forecast-day">${day}</div>
+            <div class="weather-forecast-icon">🌤️</div>
+            <div class="weather-forecast-temperatures">
+              <div class="weather-forecast-temperature">
+                <strong>15°</strong>
+              </div>
+              <div class="weather-forecast-temperature">9°</div>
+            </div>
+          </div>         
+`;
+});
+let forecastElement = document.querySelector("#forecast");
+forecastElement.innerHTML = forecasthtml;
+}
+displayForecast();
