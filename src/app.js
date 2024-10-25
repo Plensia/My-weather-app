@@ -137,6 +137,7 @@ function updateweather(response) {
   searchButton.innerHTML = "🔍 Search";
   searchButton.style.cursor = "pointer";
   searchButton.disabled = false;
+  getForecast(response.data.city);
 }
 
 function searchCity(city) {
@@ -335,10 +336,13 @@ searchInput.addEventListener("keydown", (e) => {
   }
 })();
 
+function getForecast(city) {
+  let apiKey = "0b784b548a99fteo7141a3d30034ab9f";
+  let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=metric`;
+  axios(apiUrl).then(displayForecast);
+}
+function displayForecast(response) {
 //forecast details
-function displayForecast(){
-
-
 
 let days = ["Tue", "wed", "Thu", "Fri", "Sat"];
 let forecasthtml = "";
