@@ -152,7 +152,7 @@ main {
   
   .weather-forecast-day {
     text-align: center;
-    color: antiquewhite;
+    color: rgba(39, 33, 66, 0.4);
     font-size: 16px;
     line-height: 20px;
     margin-bottom: 10px;
