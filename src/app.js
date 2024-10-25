@@ -239,6 +239,9 @@ suggestionsContainer.addEventListener("click", (e) => {
       .trim();
     suggestionsContainer.style.display = "none";
   }
+
+  const searchInputTwo = document.querySelector("#search-form-input");
+  searchCity(searchInputTwo.value);
 });
 
 // Close suggestions when clicking outside
@@ -304,7 +307,7 @@ searchInput.addEventListener("keydown", (e) => {
 (() => {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
-      function (position) {
+      async function (position) {
         let lat = position.coords.latitude;
         let lon = position.coords.longitude;
 
@@ -312,7 +315,7 @@ searchInput.addEventListener("keydown", (e) => {
         let apiKey = "c9e589d80fc640739c1330d7f11fbee8";
         let api_url = `https://api.opencagedata.com/geocode/v1/json?q=${lat}+${lon}&key=${apiKey}`;
 
-        fetch(api_url)
+        await fetch(api_url)
           .then((response) => response.json())
           .then((data) => {
             // Extracting city from the response
@@ -335,41 +338,68 @@ searchInput.addEventListener("keydown", (e) => {
     console.log("Geolocation is not supported by this browser.");
   }
 })();
-function formatDay(timestamp){
-   let date = new Date(timestamp * 1000);
-   let days = ["Sun", "Mon", "Tue","Wed", "Thu","Fri", "Sat"];
 
-   return days[date.getDay()];
+// Function to hide the loading overlay with fade effect
+function hideLoadingOverlay() {
+  const overlay = document.getElementById("loading-overlay");
+  if (overlay) {
+    overlay.classList.add("fade-out");
+  }
 }
+
+// Function to show the loading overlay
+function showLoadingOverlay() {
+  const overlay = document.getElementById("loading-overlay");
+  overlay.classList.remove("fade-out");
+}
+
+// Example: Trigger loading overlay manually
+function simulateLoading() {
+  showLoadingOverlay();
+  setTimeout(hideLoadingOverlay, 2000); // Hide after 2 seconds
+}
+
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+  return days[date.getDay()];
+}
+
 function getForecast(city) {
   let apiKey = "0b784b548a99fteo7141a3d30034ab9f";
   let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=metric`;
   axios(apiUrl).then(displayForecast);
 }
-function displayForecast(response) {
-//forecast details
 
-let forecasthtml = "";
-response.data.daily.forEach(function (day,index){
-if(index < 5){
-forecasthtml +=  
-`
- <div class="weather-forecast-details">
+function displayForecast(response) {
+  //forecast details
+  let forecasthtml = "";
+  response.data.daily.forEach(function (day, index) {
+    if (index < 5) {
+      forecasthtml += `
+          <div class="weather-forecast-details">
             <div class="weather-forecast-day">${formatDay(day.time)}</div>
             <div>
-             <img src="${day.condition.icon_url}"  class="weather-forecast-icon"/>
+             <img src="${
+               day.condition.icon_url
+             }"  class="weather-forecast-icon"/>
             </div>
             <div class="weather-forecast-temperatures">
               <div class="weather-forecast-temperature">
                 <strong>${Math.round(day.temperature.maximum)}°</strong>
               </div>
-              <div class="weather-forecast-temperature">${Math.round(day.temperature.minimum)}°</div>
+              <div class="weather-forecast-temperature">${Math.round(
+                day.temperature.minimum
+              )}°</div>
             </div>
           </div>         
 `;
+    }
+  });
+
+  let forecastElement = document.querySelector("#forecast");
+  forecastElement.innerHTML = forecasthtml;
+
+  setTimeout(hideLoadingOverlay, 500);
 }
-});
-let forecastElement = document.querySelector("#forecast");
-forecastElement.innerHTML = forecasthtml;
-}
-displayForecast();

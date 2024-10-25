@@ -22,6 +22,88 @@ header {
   padding: 0 0 30px 0;
 }
 
+#loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: antiquewhite;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+  visibility: visible;
+}
+
+#loading-overlay.fade-out {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.loader {
+  width: 50px;
+  aspect-ratio: 1;
+  display: grid;
+  border: 4px solid transparent;
+  border-radius: 50%;
+  border-right-color: #25b09b;
+  animation: spin 1s infinite linear;
+}
+
+.loader::before,
+.loader::after {
+  content: "";
+  grid-area: 1/1;
+  margin: 2px;
+  border: inherit;
+  border-radius: 50%;
+  animation: spin 2s infinite linear;
+}
+
+.loader::after {
+  margin: 8px;
+  animation-duration: 3s;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.content {
+  padding: 20px;
+  text-align: center;
+}
+
+.loaderTwo {
+  margin: 0 auto;
+  width: 35px;
+  aspect-ratio: 2;
+  --_g: no-repeat radial-gradient(circle closest-side, #000 90%, #0000);
+  background: var(--_g) 0% 50%, var(--_g) 50% 50%, var(--_g) 100% 50%;
+  background-size: calc(100% / 3) 50%;
+  animation: l3 1s infinite linear;
+}
+
+@keyframes l3 {
+  20% {
+    background-position: 0% 0%, 50% 50%, 100% 50%;
+  }
+  40% {
+    background-position: 0% 100%, 50% 0%, 100% 50%;
+  }
+  60% {
+    background-position: 0% 50%, 50% 100%, 100% 0%;
+  }
+  80% {
+    background-position: 0% 50%, 50% 50%, 100% 100%;
+  }
+}
+
 h1 {
   margin: 0;
   font-size: 38px;
@@ -61,7 +143,7 @@ button.search-form-button {
   cursor: pointer;
   margin-left: 5px;
   padding: 12px 10px;
-  border: 1px solid black;
+  border: 0.5px solid #8c7d6c;
   font-size: 14px;
   border-radius: 7px;
   background-color: #ffe4c4;
@@ -144,36 +226,39 @@ main {
   margin-top: 16px;
   font-size: 28px;
 }
+
 .weather-forecast {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 30px;
-  }
-  
-  .weather-forecast-day {
-    text-align: center;
-    color: rgba(39, 33, 66, 0.4);
-    font-size: 16px;
-    line-height: 20px;
-    margin-bottom: 10px;
-  }
-  .weather-forecast-icon {
-    width: 88px;
-    height: 88px;
-    display: block;
-    margin: 0 auto;
-  }
-  .weather-forecast-temperatures {
-    text-align: center;
-    color: burlywood;
-    margin-top: 10px;
-    display: flex;
-    justify-content: center;
-  }
-  .weather-forecast-temperature {
-    padding: 0 10px;
-  }
-  
+  display: flex;
+  justify-content: space-around;
+  margin-top: 30px;
+}
+
+.weather-forecast-day {
+  text-align: center;
+  color: rgba(39, 33, 66, 0.4);
+  font-size: 16px;
+  line-height: 20px;
+  margin-bottom: 10px;
+}
+
+.weather-forecast-icon {
+  width: 88px;
+  height: 88px;
+  display: block;
+  margin: 0 auto;
+}
+
+.weather-forecast-temperatures {
+  text-align: center;
+  color: burlywood;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.weather-forecast-temperature {
+  padding: 0 10px;
+}
 
 footer {
   border-top: 1px solid antiquewhite;
