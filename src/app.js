@@ -109,6 +109,52 @@ document.addEventListener("DOMContentLoaded", function () {
   }, 1000);
 });
 
+// Weather background handling function
+function updateBackgroundByWeather(weatherDescription) {
+  const weatherApp = document.querySelector('.my-weather-app');
+  const body = document.body;
+  
+  // Remove existing weather classes
+  const existingClasses = Array.from(weatherApp.classList)
+    .filter(className => className.startsWith('weather-'));
+  existingClasses.forEach(className => {
+    weatherApp.classList.remove(className);
+    body.classList.remove(`${className}-bg`);
+  });
+  
+  // Convert description to lowercase and replace spaces with hyphens
+  const description = weatherDescription.toLowerCase();
+  
+  // Map weather conditions to class names
+  const weatherClassMap = {
+    'clear': 'weather-clear-sky',
+    'sunny': 'weather-clear-sky',
+    'partly cloudy': 'weather-few-clouds',
+    'cloudy': 'weather-few-clouds',
+    'overcast': 'weather-few-clouds',
+    'rain': 'weather-rain',
+    'shower': 'weather-rain',
+    'drizzle': 'weather-rain',
+    'thunderstorm': 'weather-thunderstorm',
+    'snow': 'weather-snow',
+    'mist': 'weather-few-clouds',
+    'fog': 'weather-few-clouds'
+  };
+  
+  // Find matching class or use default
+  let weatherClass = 'weather-few-clouds'; // default
+  for (const [condition, className] of Object.entries(weatherClassMap)) {
+    if (description.includes(condition)) {
+      weatherClass = className;
+      break;
+    }
+  }
+  
+  // Apply the new classes
+  weatherApp.classList.add(weatherClass);
+  body.classList.add(`${weatherClass}-bg`);
+}
+
 function updateweather(response) {
   let temperatureElement = document.querySelector("#temp-value");
   let temperature = response.data.temperature.current;
@@ -118,10 +164,7 @@ function updateweather(response) {
   let humidityElement = document.querySelector("#humidity");
   let windspeedElement = document.querySelector("#wind-speed");
   let timeElement = document.querySelector("#time");
-
-  //date
   let date = new Date(response.data.time * 1000);
-
   let iconElement = document.querySelector("#weather-icon");
 
   iconElement.innerHTML = `<img src="${response.data.condition.icon_url}" class="temperature-icon"/>`;
@@ -129,6 +172,10 @@ function updateweather(response) {
   let cityElement = document.querySelector("#weather-app-city");
   timeElement.innerHTML = formatDate(date);
   descriptionElement.innerHTML = response.data.condition.description;
+  
+  // Update background based on weather
+  updateBackgroundByWeather(response.data.condition.description);
+  
   humidityElement.innerHTML = `${response.data.temperature.humidity}%`;
   windspeedElement.innerHTML = `${response.data.wind.speed}km/h`;
   cityElement.innerHTML = response.data.city;
@@ -137,6 +184,7 @@ function updateweather(response) {
   searchButton.innerHTML = "🔍 Search";
   searchButton.style.cursor = "pointer";
   searchButton.disabled = false;
+  
   getForecast(response.data.city);
 }
 
@@ -373,3 +421,41 @@ let forecastElement = document.querySelector("#forecast");
 forecastElement.innerHTML = forecasthtml;
 }
 displayForecast();
+
+// Ensure the loading overlay is handled
+document.addEventListener("DOMContentLoaded", function () {
+  setTimeout(function () {
+    const overlay = document.getElementById("loading-overlay");
+    overlay.classList.add("hidden");
+    overlay.addEventListener("transitionend", function () {
+      overlay.remove();
+    });
+  }, 1000);
+});
+
+// Initialize geolocation on load
+(() => {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      function (position) {
+        let lat = position.coords.latitude;
+        let lon = position.coords.longitude;
+        let apiKey = "c9e589d80fc640739c1330d7f11fbee8";
+        let api_url = `https://api.opencagedata.com/geocode/v1/json?q=${lat}+${lon}&key=${apiKey}`;
+
+        fetch(api_url)
+          .then((response) => response.json())
+          .then((data) => {
+            let city = data.results[0].components.city || data.results[0].components.town;
+            searchCity(city);
+          })
+          .catch((error) => console.log("Error fetching geolocation data:", error));
+      },
+      function (error) {
+        console.log("Error getting location:", error.message);
+      }
+    );
+  } else {
+    console.log("Geolocation is not supported by this browser.");
+  }
+})();
