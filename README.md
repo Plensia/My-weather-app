@@ -4,7 +4,8 @@ A responsive, user-friendly weather application that provides real-time weather 
 Built to showcase a clean and interactive UI with seamless weather updates,
 it’s hosted at (https://project-my-weather-app.netlify.app/).
 
-<img width="554" alt="image" src="https://github.com/user-attachments/assets/47837ec2-4f2f-42f9-80e0-6d0c65c1709b">
+![Screenshot 2025-01-06 032530](https://github.com/user-attachments/assets/3e0bf6b3-8274-4613-a63d-2aaaec6cd71b)
+
 
 ## Features
 
