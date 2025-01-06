@@ -81,6 +81,129 @@
   border-color: rgba(0, 0, 0, 0.1);
 }
 
+/* Weather Animation Container */
+.weather-animation-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+/* Rain Styles */
+.rain-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: none; /* Hidden by default */
+}
+
+.rain-drop {
+  position: absolute;
+  width: 2px;
+  height: 100px;
+  background: linear-gradient(transparent, rgba(255, 255, 255, 0.4));
+  animation: rain-fall linear infinite;
+}
+
+/* Generate different positions and delays for rain drops */
+.rain-drop:nth-child(1) { left: 5%; animation-duration: 1.5s; animation-delay: 0s; }
+.rain-drop:nth-child(2) { left: 15%; animation-duration: 1.8s; animation-delay: 0.2s; }
+.rain-drop:nth-child(3) { left: 25%; animation-duration: 1.6s; animation-delay: 0.4s; }
+.rain-drop:nth-child(4) { left: 35%; animation-duration: 1.4s; animation-delay: 0.1s; }
+.rain-drop:nth-child(5) { left: 45%; animation-duration: 1.7s; animation-delay: 0.3s; }
+.rain-drop:nth-child(6) { left: 55%; animation-duration: 1.5s; animation-delay: 0.5s; }
+.rain-drop:nth-child(7) { left: 65%; animation-duration: 1.9s; animation-delay: 0.2s; }
+.rain-drop:nth-child(8) { left: 75%; animation-duration: 1.6s; animation-delay: 0.4s; }
+.rain-drop:nth-child(9) { left: 85%; animation-duration: 1.4s; animation-delay: 0.1s; }
+.rain-drop:nth-child(10) { left: 95%; animation-duration: 1.7s; animation-delay: 0.3s; }
+.rain-drop:nth-child(11) { left: 10%; animation-duration: 1.5s; animation-delay: 0.6s; }
+.rain-drop:nth-child(12) { left: 20%; animation-duration: 1.8s; animation-delay: 0.3s; }
+.rain-drop:nth-child(13) { left: 30%; animation-duration: 1.6s; animation-delay: 0.5s; }
+.rain-drop:nth-child(14) { left: 40%; animation-duration: 1.4s; animation-delay: 0.2s; }
+.rain-drop:nth-child(15) { left: 50%; animation-duration: 1.7s; animation-delay: 0.4s; }
+.rain-drop:nth-child(16) { left: 60%; animation-duration: 1.5s; animation-delay: 0.1s; }
+.rain-drop:nth-child(17) { left: 70%; animation-duration: 1.9s; animation-delay: 0.3s; }
+.rain-drop:nth-child(18) { left: 80%; animation-duration: 1.6s; animation-delay: 0.5s; }
+.rain-drop:nth-child(19) { left: 90%; animation-duration: 1.4s; animation-delay: 0.2s; }
+.rain-drop:nth-child(20) { left: 100%; animation-duration: 1.7s; animation-delay: 0.4s; }
+
+@keyframes rain-fall {
+  0% {
+    transform: translateY(-120px);
+  }
+  100% {
+    transform: translateY(100vh);
+  }
+}
+
+/* Cloud Styles */
+.cloud-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: none; /* Hidden by default */
+}
+
+.cloud {
+  position: absolute;
+  width: 120px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 20px;
+  animation: cloud-move linear infinite;
+}
+
+.cloud:before,
+.cloud:after {
+  content: '';
+  position: absolute;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+}
+
+.cloud:before {
+  width: 50px;
+  height: 50px;
+  top: -20px;
+  left: 15px;
+}
+
+.cloud:after {
+  width: 40px;
+  height: 40px;
+  top: -15px;
+  right: 15px;
+}
+
+/* Generate different positions and delays for clouds */
+.cloud:nth-child(1) { top: 20%; animation-duration: 60s; animation-delay: 0s; }
+.cloud:nth-child(2) { top: 40%; animation-duration: 75s; animation-delay: 15s; }
+.cloud:nth-child(3) { top: 60%; animation-duration: 90s; animation-delay: 30s; }
+.cloud:nth-child(4) { top: 80%; animation-duration: 70s; animation-delay: 45s; }
+
+@keyframes cloud-move {
+  0% {
+    transform: translateX(-200px);
+  }
+  100% {
+    transform: translateX(calc(100vw + 200px));
+  }
+}
+
+/* Show animations based on weather */
+.weather-rain .rain-container {
+  display: block;
+}
+
+.weather-few-clouds .cloud-container,
+.weather-scattered-clouds .cloud-container,
+.weather-broken-clouds .cloud-container {
+  display: block;
+}
 /* Base styles */
 body {
   font-family: "Lato", sans-serif;

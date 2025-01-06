@@ -115,14 +115,14 @@ function updateBackgroundByWeather(weatherDescription) {
   const body = document.body;
   
   // Remove existing weather classes
-  const existingClasses = Array.from(weatherApp.classList)
+  const existingClasses = Array.from(document.body.classList)
     .filter(className => className.startsWith('weather-'));
   existingClasses.forEach(className => {
     weatherApp.classList.remove(className);
     body.classList.remove(`${className}-bg`);
+    body.classList.remove(className); // Remove from body for animations
   });
   
-  // Convert description to lowercase and replace spaces with hyphens
   const description = weatherDescription.toLowerCase();
   
   // Map weather conditions to class names
@@ -153,6 +153,7 @@ function updateBackgroundByWeather(weatherDescription) {
   // Apply the new classes
   weatherApp.classList.add(weatherClass);
   body.classList.add(`${weatherClass}-bg`);
+  body.classList.add(weatherClass); // Add to body for animations
 }
 
 function updateweather(response) {
